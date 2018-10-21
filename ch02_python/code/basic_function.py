@@ -6,6 +6,7 @@ Created on Sat Oct 20 18:05:12 2018
 @author: tgbaggio
 """
 
+
 # 定义函数f
 def f(a, b):
     return a + b
@@ -19,6 +20,7 @@ g(1, 2)
 
 
 l = [1, 2, 3]
+
 
 def h(a):
     return a + 1
@@ -34,5 +36,4 @@ list(filter(lambda a: a >= 2, l))
 
 # 使用reduce对数据进行加和
 from functools import reduce
-reduce(lambda accvalue, newvalue: accvalue + newvalue,
-       l, 10)
+reduce(lambda accvalue, newvalue: accvalue + newvalue, l, 10)

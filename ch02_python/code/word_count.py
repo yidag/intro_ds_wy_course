@@ -10,11 +10,11 @@ Created on Sat Oct 20 15:18:18 2018
 def word_count(data):
     """
     输入一个字符串列表，统计列表中字符串出现的次数
-    
+
     参数
     ----
     data: list[str]，需要统计的字符串列表
-    
+
     返回
     ----
     re: dict，结果hash表，key为字符串，value为对应的出现次数

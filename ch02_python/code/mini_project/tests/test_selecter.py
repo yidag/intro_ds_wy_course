@@ -13,8 +13,8 @@ def test_selecter():
     data = ["a", "b", "c", "a"]
     re = get_frequent_item(data)
     assert(re[0] == "a")
-    
-    
+
+
 if __name__ == "__main__":
     print("begin to run test_selecter")
     test_selecter()

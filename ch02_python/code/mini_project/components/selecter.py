@@ -7,11 +7,11 @@ from mini_project.components.counter import word_count
 def get_frequent_item(data):
     """
     对于给定的字符串列表，找出其中出现次数最多的字符
-    
+
     参数
     ----
     data: list[str]，字符串列表
-    
+
     返回
     ----
     re: list[str]，出现次数最多的字符串

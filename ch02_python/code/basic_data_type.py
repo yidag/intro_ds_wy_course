@@ -56,7 +56,9 @@ d.get("b", "not exist")
 d["c"] = 3
 
 # 遍历元祖
-for i in t: print(i)
+for i in t:
+    print(i)
 
 # 遍历字典
-for i in d: print("the key is %s" % i, "the value is %s" % d[i])
+for i in d:
+    print("the key is %s" % i, "the value is %s" % d[i])
