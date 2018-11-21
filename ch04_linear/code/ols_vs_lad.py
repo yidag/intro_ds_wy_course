@@ -70,7 +70,6 @@ def visualize_model(x, y, ols, lad):
     plt.show()
     
     
-    
 def train_OLS(x, y):
     """
     训练OLS线性回归模型，并返回模型预测值
