@@ -61,9 +61,9 @@ def visualize_model(x, y, ols, lad):
     ax.scatter(x, y, color="b", alpha=0.4)
     # 将模型结果可视化出来
     # 用红色虚线表示OLS线性回归模型的结果
-    ax.plot(x, ols, 'r--', label="ols")
+    ax.plot(x, ols, 'r--', label="OLS")
     # 用黑色实线表示LAD线性回归模型的结果
-    ax.plot(x, lad, 'k', label="lad")
+    ax.plot(x, lad, 'k', label="LAD")
     plt.legend(shadow=True)
     # 展示上面所画的图片。图片将阻断程序的运行，直至所有的图片被关闭
     # 在Python shell里面，可以设置参数"block=False"，使阻断失效
