@@ -15,6 +15,7 @@ def generate_data():
     """
     随机生成数据
     """
+    # 规定随机数生成的种子
     np.random.seed(4889)
     # Python2和Python3的range并不兼容，所以使用list(range(10, 29))
     x = np.array([10] + list(range(10, 29)))
@@ -36,7 +37,8 @@ def visualize_data(data):
     ax.set_ylabel("$y$")
     ax.set_yticks(range(10, 31, 5))
     # 画点图，点的颜色为蓝色
-    ax.scatter(data.x, data.y, color="b", label="$y = x + \epsilon$")
+    ax.scatter(data.x, data.y, color="b",
+               label="$y = x + \epsilon$")
     plt.legend(shadow=True)
     # 展示上面所画的图片。图片将阻断程序的运行，直至所有的图片被关闭
     # 在Python shell里面，可以设置参数"block=False"，使阻断失效。
