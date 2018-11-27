@@ -27,22 +27,25 @@ def generate_data():
     return pd.DataFrame({"x": x, "y": y})
 
 
-def visualize_data(data):
+def train_OLS(x, y):
     """
-    数据可视化
+    训练OLS线性回归模型，并返回模型预测值
     """
-    # 创建一个图形框，在里面只画一幅图
-    fig = plt.figure(figsize=(6, 6), dpi=80)
-    ax = fig.add_subplot(111)
-    ax.set_xlabel("$x$")
-    ax.set_xticks(range(10, 31, 5))
-    ax.set_ylabel("$y$")
-    # 画点图，点的颜色为蓝色
-    ax.scatter(data.x, data.y, color="b")
-    plt.legend(shadow=True)
-    # 展示上面所画的图片。图片将阻断程序的运行，直至所有的图片被关闭
-    # 在Python shell里面，可以设置参数"block=False"，使阻断失效。
-    plt.show()
+    model = linear_model.LinearRegression()
+    model.fit(x, y)
+    re = model.predict(x)
+    return re
+
+
+def train_LAD(x, y):
+    """
+    训练LAD线性回归模型，并返回模型预测值
+    """
+    X = sm.add_constant(x)
+    model = QuantReg(y, X)
+    model = model.fit(q=0.5)
+    re = model.predict(X)
+    return re
     
     
 def visualize_model(x, y, ols, lad):
@@ -68,27 +71,6 @@ def visualize_model(x, y, ols, lad):
     # 展示上面所画的图片。图片将阻断程序的运行，直至所有的图片被关闭
     # 在Python shell里面，可以设置参数"block=False"，使阻断失效
     plt.show()
-    
-    
-def train_OLS(x, y):
-    """
-    训练OLS线性回归模型，并返回模型预测值
-    """
-    model = linear_model.LinearRegression()
-    model.fit(x, y)
-    re = model.predict(x)
-    return re
-
-    
-def train_LAD(x, y):
-    """
-    训练LAD线性回归模型，并返回模型预测值
-    """
-    X = sm.add_constant(x)
-    model = QuantReg(y, X)
-    model = model.fit(q=0.5)
-    re = model.predict(X)
-    return re
 
 
 def OLS_vs_LAD(data):
@@ -104,5 +86,4 @@ def OLS_vs_LAD(data):
     
 if __name__ == "__main__":
     data = generate_data()
-    visualize_data(data)
     OLS_vs_LAD(data)
