@@ -60,7 +60,7 @@ def run():
     features = ["x"]
     label = ["y"]
     ci = []
-    # 循环运行1000次
+    # 循环运行100次
     for i in range(100):
         data = generate_data()
         X = sm.add_constant(data[features])

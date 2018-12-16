@@ -42,38 +42,38 @@ def train_model(x, y):
     
     返回
     ----
-    re : RegressionResults, 训练好的线性模型
+    res : RegressionResults, 训练好的线性模型
     """
     # 创建一个线性回归模型
     model = sm.OLS(y, x)
     # 训练模型，估计模型参数
-    re = model.fit()
-    return re
+    res = model.fit()
+    return res
 
 
-def model_summary(re):
+def model_summary(res):
     """
     分析线性回归模型的统计性质
     """
     # 整体统计分析结果
-    print(re.summary())
+    print(res.summary())
     # 用f test检测x对应的系数a是否显著
     print("检验假设x的系数等于0：")
-    print(re.f_test("x=0"))
+    print(res.f_test("x=0"))
     # 用f test检测常量b是否显著
     print("检测假设const的系数等于0：")
-    print(re.f_test("const=0"))
+    print(res.f_test("const=0"))
     # 用f test检测a=1, b=0同时成立的显著性
     print("检测假设x的系数等于1和const的系数等于0同时成立：")
-    print(re.f_test(["x=1", "const=0"]))
+    print(res.f_test(["x=1", "const=0"]))
+
     
-    
-def get_prediction(re, x):
+def get_prediction(res, x):
     """
     得到模型的预测结果以及结果的上下限
     """
-    prstd, ci_low, ci_up = wls_prediction_std(re, alpha=0.05)
-    pred = re.predict(x)
+    prstd, ci_low, ci_up = wls_prediction_std(res, alpha=0.05)
+    pred = res.predict(x)
     return pd.DataFrame({"ci_low": ci_low, "pred": pred, "ci_up": ci_up})
 
 
@@ -109,11 +109,11 @@ def run_model(data):
     # 加入常量变量
     X = sm.add_constant(data[features])
     # 构建模型
-    re = train_model(X, data[labels])
+    res = train_model(X, data[labels])
     # 分析模型效果
-    model_summary(re)
+    model_summary(res)
     # 得到模型的预测结果
-    pred = get_prediction(re, X)
+    pred = get_prediction(res, X)
     # 将模型结果可视化
     visualize_model(pred, data[features], data[labels])
 
