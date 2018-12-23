@@ -31,6 +31,7 @@ def read_data(path):
 
 def generate_random_var():
     """
+    生成不相关的特征
     """
     np.random.seed(4873)
     return np.random.randint(2, size=20)
@@ -38,7 +39,9 @@ def generate_random_var():
 
 def train_model(x, y, alpha):
     """
+    训练模型
     """
+    # 数据里面已经包含常变量，所以fit_intercept=False
     model = linear_model.Lasso(alpha=alpha, fit_intercept=False)
     model.fit(x, y)
     return model
@@ -70,7 +73,7 @@ def run_model(data):
     labels = ["y"]
     Y = data[labels]
     X = data[features]
-    # 加入新的随机变量，次变量的系数应为0
+    # 加入新的随机变量，这个变量的系数应为0
     X["z"] = generate_random_var()
     # 加入常变量const
     X = sm.add_constant(X)
@@ -80,7 +83,6 @@ def run_model(data):
         model = train_model(X, Y, alpha)
         coefs.append(model.coef_)
     coefs = np.array(coefs)
-    print(coefs)
     # 可视化惩罚项效果
     visualize_model(X, Y, alphas, coefs)
 
