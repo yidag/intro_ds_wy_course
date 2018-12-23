@@ -15,14 +15,6 @@ from sklearn.preprocessing import PolynomialFeatures
 def read_data(path):
     """
     使用pandas读取数据
-    
-    参数
-    ----
-    path: String，数据的路径
-    
-    返回
-    ----
-    data: DataFrame，建模数据
     """
     data = pd.read_csv(path)
     return data
@@ -31,22 +23,6 @@ def read_data(path):
 def evaluate_model(model, test_data, features, labels, featurizer):
     """
     计算线性模型的均方差和决定系数
-    
-    参数
-    ----
-    model : LinearRegression, 训练完成的线性模型
-    
-    testData : DataFrame，测试数据
-    
-    features : list[str]，特征名列表
-    
-    labels : list[str]，标签名列表
-    
-    返回
-    ----
-    error : np.float64，均方差
-    
-    score : np.float64，决定系数
     """
     # 均方差(The mean squared error)，均方差越小越好
     error = np.mean(
@@ -59,18 +35,6 @@ def evaluate_model(model, test_data, features, labels, featurizer):
 def train_model(train_data, features, labels, featurizer):
     """
     利用训练数据，估计模型参数
-    
-    参数
-    ----
-    trainData : DataFrame，训练数据集，包含特征和标签
-    
-    features : 特征名列表
-    
-    labels : 标签名列表
-    
-    返回
-    ----
-    model : LinearRegression, 训练好的线性模型
     """
     # 创建一个线性回归模型
     model = linear_model.LinearRegression(fit_intercept=False)
@@ -120,18 +84,21 @@ def run_model(data):
     train_data = data[:15]
     test_data = data[15:]
     featurizer = []
+    # overfitting_model和overfitting_evaluation记录区分训练集和测试集的模型效果
     overfitting_model = []
     overfitting_evaluation = []
+    # model和evaluation记录过度拟合的模型效果
     model = []
     evaluation = []
     for i in range(1, 11, 3):
         featurizer.append(PolynomialFeatures(degree=i))
         # 产生并训练模型
         overfitting_model.append(train_model(train_data, features, labels, featurizer[-1]))
-        model.append(train_model(data, features, labels, featurizer[-1]))
         # 评价模型效果
         overfitting_evaluation.append(
             evaluate_model(overfitting_model[-1], test_data, features, labels, featurizer[-1]))
+        # 过度拟合
+        model.append(train_model(data, features, labels, featurizer[-1]))
         evaluation.append(evaluate_model(model[-1], data, features, labels, featurizer[-1]))
     # 图形化模型结果
     visualize_model(model, featurizer, data, features, labels, evaluation)

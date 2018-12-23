@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-此脚本用于展示使用惩罚项解决模型幻觉的问题
+此脚本用于展示使用假设检验解决模型幻觉的问题
 """
 
 
@@ -18,14 +18,6 @@ import pandas as pd
 def read_data(path):
     """
     使用pandas读取数据
-    
-    参数
-    ----
-    path: String，数据的路径
-    
-    返回
-    ----
-    data: DataFrame，建模数据
     """
     data = pd.read_csv(path)
     return data
@@ -79,8 +71,11 @@ def run_model(data):
     X = sm.add_constant(_X)
     res = train_model(X, Y)
     evaluate_model(res)
-    
-    
+    # 使用如下的代码去掉变量z，然后重新训练模型
+    # X = X.drop(["z"], axis=1)
+    # train_model(X, Y)
+
+
 if __name__ == "__main__":
     home_path = os.path.dirname(os.path.abspath(__file__))
     # Windows下的存储路径与Linux并不相同

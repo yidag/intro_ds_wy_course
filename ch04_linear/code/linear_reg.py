@@ -16,14 +16,6 @@ import pandas as pd
 def read_data(path):
     """
     使用pandas读取数据
-    
-    参数
-    ----
-    path: String，数据的路径
-    
-    返回
-    ----
-    data: DataFrame，建模数据
     """
     data = pd.read_csv(path)
     return data
@@ -45,6 +37,7 @@ def train_model(x, y, alpha):
     model = linear_model.Lasso(alpha=alpha, fit_intercept=False)
     model.fit(x, y)
     return model
+
 
 def visualize_model(X, Y, alphas, coefs):
     """
