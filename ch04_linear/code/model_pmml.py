@@ -26,7 +26,7 @@ def train_and_save_model(data, model_path):
     """
     model = PMMLPipeline([("regressor", linear_model.LinearRegression())])
     model.fit(data[["x"]], data["y"])
-    sklearn2pmml(model, "linear.pmml", with_repr=True)
+    sklearn2pmml(model, model_path, with_repr=True)
     
 
 def run_model(data, model_path):
