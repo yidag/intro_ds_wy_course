@@ -26,7 +26,7 @@ def train_and_save_model(data, model_path):
     """
     model = PMMLPipeline([("regressor", linear_model.LinearRegression())])
     model.fit(data[["x"]], data["y"])
-    sklearn2pmml(model, model_path, with_repr=True)
+    sklearn2pmml(model, model_path)
     
 
 def run_model(data, model_path):
@@ -34,8 +34,8 @@ def run_model(data, model_path):
     运行模型
     """
     train_and_save_model(data, model_path)
-    
-    
+
+
 if __name__ == "__main__":
     home_path = os.path.dirname(os.path.abspath(__file__))
     # Windows下的存储路径与Linux并不相同
