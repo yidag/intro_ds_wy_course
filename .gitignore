@@ -13,3 +13,4 @@
 .DS_Store
 build
 logs
+.ipynb_checkpoints
